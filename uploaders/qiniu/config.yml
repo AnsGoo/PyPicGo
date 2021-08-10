@@ -1,0 +1,15 @@
+uploader:
+  name: qiniu
+  moduele: uploaders.qiniu.uploader.QiNiuUploader
+  config:
+    domain: http://demo.pypicho.com/
+    bucket_name: pypicgo
+    apis:
+      - http://up-z1.qiniup.com
+    access_key: xxx
+    secret_key:  xxxx
+plugins:
+  - module: plugins.md5.ReNamePlugin
+    config:
+
+

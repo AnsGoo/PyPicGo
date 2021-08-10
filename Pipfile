@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.douban.com/simple"
+verify_ssl = false
+name = "pypi"
+
+[packages]
+requests = "*"
+requests-toolbelt = "*"
+pydantic = "*"
+pyyaml = "*"
+pyperclip = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"

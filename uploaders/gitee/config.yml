@@ -1,0 +1,13 @@
+uploader:
+  name: gitee
+  module: uploaders.gitee.uploader.GiteeUploader
+  config:
+    domain: https://gitee.com
+    owner: Ranger313
+    repo: pbed
+    branch: master
+    img_path: PyPicGo
+    access_token: xxx
+plugins:
+  - module: plugins.md5.ReNamePlugin
+    config:
