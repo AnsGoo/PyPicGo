@@ -2,6 +2,9 @@
 
 PyPicGo 是参考[PicGo](https://github.com/PicGo/PicGo-Core)开发的一款图床上传的图传工具，并支持各种插件自定义插件，目前PyPicGo自带了`gitee`和`七牛云`图传，和`rename`、`notify`和`typora`等插件，并支持从`pypi`中下载其他插件和`Uploader`’。
 
+## PyPicGo 流程图
+
+![PyPicGo 流程图](https://gitee.com/Ranger313/pbed/raw/master/img/ce9da59dc0436393cd8cca6b66a14f7d-image-20210811084828473-07add3.png)
 
 ## 支持的图床
 
