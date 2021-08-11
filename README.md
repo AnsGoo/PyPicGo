@@ -35,7 +35,7 @@ uploader:
     img_path: PyPicGo
     access_token: xxxxxxxxxxxx
 plugins: # 插件列表
-  - module: plugins.md5.ReNamePlugin # 插件模块
+  - module: plugins.rename.ReNamePlugin # 插件模块
     config: # 插件配置
   - module: plugins.notify.NotifyPlugin
     config:

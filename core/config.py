@@ -13,7 +13,7 @@ uploader:
   moduele: 
   config:
 plugins:
-  - module: plugins.md5.ReNamePlugin
+  - module: plugins.rename.ReNamePlugin
 '''
 home = os.environ.get('HOME')
 BASE_DIR = Path(home).joinpath('.PyPicGO')

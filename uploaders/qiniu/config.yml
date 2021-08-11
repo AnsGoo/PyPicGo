@@ -9,7 +9,7 @@ uploader:
     access_key: xxx
     secret_key:  xxxx
 plugins:
-  - module: plugins.md5.ReNamePlugin
+  - module: plugins.rename.ReNamePlugin
     config:
 
 

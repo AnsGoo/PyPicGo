@@ -1,5 +1,5 @@
 from core.base.plugin import AfterPlugin
-from core.notify import PyNotify
+from core.utils.notify import PyNotify
 from core.base.result import Result
 
 

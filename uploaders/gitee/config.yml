@@ -9,5 +9,5 @@ uploader:
     img_path: PyPicGo
     access_token: xxx
 plugins:
-  - module: plugins.md5.ReNamePlugin
+  - module: plugins.rename.ReNamePlugin
     config:
