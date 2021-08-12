@@ -9,6 +9,7 @@ requests-toolbelt = "*"
 pydantic = "*"
 pyyaml = "*"
 pyperclip = "*"
+loguru = "*"
 
 [dev-packages]
 

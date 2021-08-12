@@ -6,6 +6,7 @@ PyPicGo 是参考[PicGo](https://github.com/PicGo/PicGo-Core)开发的一款图�
 
 ![PyPicGo 流程图](https://gitee.com/Ranger313/pbed/raw/master/img/ce9da59dc0436393cd8cca6b66a14f7d-image-20210811084828473-07add3.png)
 
+
 ## 支持的图床
 
 - `gitee` 支持
@@ -60,3 +61,16 @@ PyPicgo支持的插件分为三种`before`、`after`和`final`
 |final|在图片上传前运行|`core.base.plugin.FinallyPlugin`|typora|List[Result]|
 
 如果想自定义插件只要根据要求继承任意一个基类插件,并实现`execute`方法，并在`config.yml`中配置即可使用.
+
+
+## 开发
+
+```shell
+git clone git@github.com:AnsGoo/PyPicGo.git
+
+pipenv shell
+
+pipenv install
+```
+
+**Note**: Windows 需要安装 `win10toast`, `pipenv install win10toast`

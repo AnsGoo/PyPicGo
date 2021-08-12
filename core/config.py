@@ -1,22 +1,30 @@
 import os
+import platform
 import yaml
 from pathlib import Path
 from typing import ClassVar, Dict, List
 from core.models import ConfigModel, PluginModel
 from core.utils.modules import import_string
 
-from core.execute import create_uploader
-
 template = '''
 uploader:
   name: gitee
-  moduele: 
+  module: 
   config:
 plugins:
   - module: plugins.rename.ReNamePlugin
 '''
-home = os.environ.get('HOME')
-BASE_DIR = Path(home).joinpath('.PyPicGO')
+system_name = platform.system().lower()
+
+if system_name == 'linux':
+    HOME = os.environ.get('HOME')
+    home = Path(HOME)
+    
+elif system_name == 'windows':
+    HOMEDRIVE = os.environ.get('HOMEDRIVE')
+    HOME = os.environ.get('HOMEPATH')
+    home = Path(HOMEDRIVE).joinpath(HOME)
+BASE_DIR = home.joinpath('.PyPicGO')
 if not BASE_DIR.exists():
     BASE_DIR.mkdir(parents=True)
 

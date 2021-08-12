@@ -6,9 +6,10 @@ try:
 except:
     pass
 from core.logger import logger
+
 class PyNotify():
 
-    def __init__(self, title, message, filepath, timeout=10):
+    def __init__(self, title, message, filepath, timeout=1):
         self.message = message
         self.title = title
         self.timeout = timeout
@@ -21,7 +22,8 @@ class PyNotify():
             os.system(command)
 
         elif system_name == 'linux':
-            command = f'notify-send "{self.title}" "{self.message}" -t {self.timeout} -i {self.filepath}'
+            # command = f'notify-send "{self.title}" "{self.message}" -t {self.timeout} -i {self.filepath}'
+            command = f'notify-send "{self.title}" "{self.message}" -t {self.timeout}'
             os.system(command)
 
         # Displays an alertbox
@@ -29,7 +31,7 @@ class PyNotify():
             toaster = ToastNotifier()
             toaster.show_toast(self.title,
                                self.message,
-                               icon_path=self.filepath,
+                            #    icon_path=self.filepath,
                                duration=self.timeout,
                                threaded=True)
             while toaster.notification_active():
