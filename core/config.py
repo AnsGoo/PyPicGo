@@ -19,7 +19,6 @@ system_name = platform.system().lower()
 if system_name == 'linux':
     HOME = os.environ.get('HOME')
     home = Path(HOME)
-    
 elif system_name == 'windows':
     HOMEDRIVE = os.environ.get('HOMEDRIVE')
     HOME = os.environ.get('HOMEPATH')
@@ -48,7 +47,7 @@ class Settings:
         config_file = self.CONFIG_DIR.joinpath('config.yaml')
         with open(config_file.resolve(), 'r', encoding='utf-8') as f:
             config = yaml.load(f.read(), Loader=yaml.CFullLoader)
-            model = ConfigModel(**config)
+            model = ConfigModel(uploader=config['uploader'], plugins=config.get('plugins', []))
             self.uploader_class = import_string(model.uploader.module)
             self.uploader_config = model.uploader.config
             self.plugins = model.plugins

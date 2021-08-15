@@ -15,7 +15,7 @@ from .schemas import QiNiuUploaderConfig
 from core.logger import logger
 from .utils import urlsafe_base64_encode
 
-_policy_fields = set([
+_policy_fields = set(
     'callbackUrl',  # 回调URL
     'callbackBody',  # 回调Body
     'callbackHost',  # 回调URL指定的Host
@@ -37,7 +37,7 @@ _policy_fields = set([
     'deleteAfterDays',  # 文件多少天后自动删除
     'fileType',  # 文件的存储类型，0为普通存储，1为低频存储
     'isPrefixalScope'  # 指定上传文件必须使用的前缀
-])
+)
 
 
 class QiNiuUploader(CommonUploader):

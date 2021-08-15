@@ -11,6 +11,7 @@ class ReNamePlugin(BeforePlugin):
     name = 'ReName'
     def __init__(self,format=None):
         self.format = format
+        super().__init__()
 
 
     def execute(self, file: UploadFile) -> UploadFile:

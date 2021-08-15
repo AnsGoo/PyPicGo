@@ -10,6 +10,7 @@ pydantic = "*"
 pyyaml = "*"
 pyperclip = "*"
 loguru = "*"
+pillow = "*"
 
 [dev-packages]
 
