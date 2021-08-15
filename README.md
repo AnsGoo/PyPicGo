@@ -1,6 +1,6 @@
 # PyPicGo
 
-PyPicGo 是参考[PicGo](https://github.com/PicGo/PicGo-Core)开发的一款图床上传的图传工具，并支持各种插件自定义插件，目前PyPicGo自带了`gitee`和`七牛云`图传，和`rename`、`notify`和`typora`等插件，并支持从`pypi`中下载其他插件和`Uploader`’。
+PyPicGo 是参考[PicGo](https://github.com/PicGo/PicGo-Core)开发的一款图床上传的图传工具，并支持各种插件自定义插件，目前PyPicGo自带了`gitee`和`七牛云`图传，和`rename`、`notify`和`typora`等插件，并支持从`pypi`中下载其他插件和`Uploader`。
 
 ## PyPicGo 流程图
 
@@ -72,5 +72,3 @@ pipenv shell
 
 pipenv install
 ```
-
-**Note**: Windows 需要安装 `win10toast`, `pipenv install win10toast`
