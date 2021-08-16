@@ -10,7 +10,7 @@ class TkinterNotice:
     warn_color = '#F56C6C'
     major_color = '#45898A'
     background_color = '#C6E2FF'
-    width = 400
+    width = 300
     height = 100
 
     def __init__(self):
@@ -27,7 +27,7 @@ class TkinterNotice:
         if system_name == 'linux':
             return f'{self.width}x{self.height}+{(width - self.width) // 2}+0'
         elif system_name == 'windows':
-            return f'{self.width}x{self.height}+{width - self.width - 10}+{height - self.height - 10}'
+            return f'{self.width}x{self.height}+{width - self.width - 10}+{height - self.height - 110}'
         elif system_name == 'darwin':
             return f'{self.width}x{self.height}+{(width - self.width) // 2}+0'
         else:
@@ -39,7 +39,7 @@ class TkinterNotice:
         # 在画布上创建图像，放置导入图片
         img = Image.open(filepath)
         width, height = img.size
-        width = width // height * self.height
+        width = width * self.height // height
         # 以通知窗体的高度为基准，等比例缩放图片生成缩略图
         img.thumbnail((width, self.height), Image.ANTIALIAS)
         small = min(img.size)
@@ -69,7 +69,13 @@ class TkinterNotice:
             bg=self.background_color,
             font=(None, 15),
             fg=color)
-        label_body = Label(master=self._window, text=msg, wraplength=280, bg=self.background_color, fg=self.major_color)
+        label_body = Label(
+            master=self._window, 
+            text=msg, 
+            wraplength=280, 
+            bg=self.background_color, 
+            fg=self.major_color,
+            )
         canvas.pack(fill=Y, side=LEFT)  # #相对布局
         label_tiitle.pack(fill=X, side=TOP)
         label_body.pack()
