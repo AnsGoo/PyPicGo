@@ -1,5 +1,5 @@
 from core.base.plugin import AfterPlugin
-from core.utils.notify import TkinterNotice
+from .tk import TkinterNotice
 from core.base.result import Result
 
 

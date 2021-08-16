@@ -1,7 +1,6 @@
-from pathlib import Path
-from requests import Response
 from typing import List
 from core.base.result import Result
+from core.base.file import UploadFile
 from core.exceptions import NotImplementedException
 
 
@@ -16,7 +15,7 @@ class BasePlugin:
 class BeforePlugin(BasePlugin):
     type = 'before'
 
-    def execute(self, file: Path) -> Path:
+    def execute(self, file: UploadFile) -> UploadFile:
         raise NotImplementedException()
 
 

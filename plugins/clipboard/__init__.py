@@ -1,6 +1,6 @@
 from core.base.plugin import AfterPlugin
 from core.base.result import Result
-from core.utils.clipbrd import ClipBoard
+from .clipbrd import ClipBoard
 
 
 class ClipBoardPlugin(AfterPlugin):

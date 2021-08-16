@@ -42,7 +42,7 @@ class TkinterNotice:
         width = width * self.height // height
         # 以通知窗体的高度为基准，等比例缩放图片生成缩略图
         img.thumbnail((width, self.height), Image.ANTIALIAS)
-        small = min(img.size)
+        small = 100
         # 去出来的部分为中心部分的矩形（如300*100取的是(100,0,200,100)）
         box = ((img.size[0] - small) / 2, (img.size[1] - small), (img.size[0] - small) / 2 + small,
                (img.size[1] - small) / 2 + small)
@@ -65,15 +65,15 @@ class TkinterNotice:
         label_tiitle = Label(
             master=self._window,
             text=title,
-            wraplength=280,
+            wraplength=240,
             bg=self.background_color,
             font=(None, 15),
             fg=color)
         label_body = Label(
-            master=self._window, 
-            text=msg, 
-            wraplength=280, 
-            bg=self.background_color, 
+            master=self._window,
+            text=msg,
+            wraplength=240,
+            bg=self.background_color,
             fg=self.major_color,
             )
         canvas.pack(fill=Y, side=LEFT)  # #相对布局

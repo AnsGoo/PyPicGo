@@ -81,7 +81,7 @@ class CommonUploader(BaseUploader):
     def execute_after_plugins(self, result: Result):
         for plugin in self._after_plugins:
             try:
-                self.resp = plugin.execute(result)
+                plugin.execute(result)
                 logger.info(f'plugins [{plugin.name}] execute successfully')
             except PluginExecuteException as e:
                 logger.warning(f'plugins [{plugin.name}] execute fail')
@@ -107,7 +107,8 @@ class CommonUploader(BaseUploader):
             self.execute_after_plugins(result)
 
     def final(self):
-        if isinstance(self.result.resp, Response):
-            self.execute_final_plugins(self.results)
-            if not self.file.origin_file.resolve() == self.file.tempfile.resolve():
-                os.remove(self.file.tempfile.resolve())
+        if self.result:
+            if isinstance(self.result.resp, Response):
+                self.execute_final_plugins(self.results)
+                if not self.file.origin_file.resolve() == self.file.tempfile.resolve():
+                    os.remove(self.file.tempfile.resolve())
