@@ -59,8 +59,8 @@ PyPicgo支持的插件分为三种`before`、`after`和`final`
 |插件类型|运行时间|基类类|示例插件|运行时入参|
 |--|--|--|--|--|
 |before|在图片上传前运行|`pypicgo.core.base.plugin.BeforePlugin`|rename|File|
-|after|在图片上传前运行|`pypicgo.core.base.plugin.AfterPlugin`|notify|Result|
-|final|在图片上传前运行|`pypicgo.core.base.plugin.FinallyPlugin`|typora|List[Result]|
+|after|在图片上传后运行|`pypicgo.core.base.plugin.AfterPlugin`|notify|Result|
+|final|在所有图片上传后运行|`pypicgo.core.base.plugin.FinallyPlugin`|typora|List[Result]|
 
 如果想自定义插件只要根据要求继承任意一个基类插件,并实现`execute`方法，并在`config.yml`中配置即可使用.
 
