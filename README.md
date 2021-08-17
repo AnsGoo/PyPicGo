@@ -44,7 +44,7 @@ plugins: # 插件列表
     config:
   - module: pypicgo.plugins.clipboard.ClipBoardPlugin
     config:
-  - module: pypicgo.:：plugins.typora.TyporaPlugin
+  - module: pypicgo.plugins.typora.TyporaPlugin
     config:
 ```
 
