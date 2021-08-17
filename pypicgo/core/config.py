@@ -8,11 +8,11 @@ from pypicgo.core.utils.modules import import_string
 
 template = '''
 uploader:
-  name: gitee
+  name: pypicgo.uploaders.gitee.uploader.GiteeUploader
   module: 
   config:
 plugins:
-  - module: plugins.rename.ReNamePlugin
+  - module: pypicgo.plugins.rename.ReNamePlugin
 '''
 system_name = platform.system().lower()
 

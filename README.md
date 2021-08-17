@@ -1,10 +1,12 @@
 # PyPicGo
 
-PyPicGo 是参考[PicGo](https://github.com/PicGo/PicGo-Core)开发的一款图床上传的图传工具，并支持各种插件自定义插件，目前PyPicGo自带了`gitee`和`七牛云`图传，和`rename`、`notify`和`typora`等插件，并支持从`pypi`中下载其他插件和`Uploader`。
+PyPicGo 是参考![PicGo](https://github.com/PicGo/PicGo-Core)开发的一款图床上传的图传工具，并支持各种插件自定义插件，目前PyPicGo自带了`gitee`和`七牛云`图传，和`rename`、`notify`和`typora`等插件，并支持从`pypi`中下载其他插件和`Uploader`。
 
 ## PyPicGo 流程图
 
-![PyPicGo 流程图](https://gitee.com/Ranger313/pbed/raw/master/img/ce9da59dc0436393cd8cca6b66a14f7d-image-20210811084828473-07add3.png)
+<div align=center>
+<img src="https://gitee.com/Ranger313/pbed/raw/master/img/ce9da59dc0436393cd8cca6b66a14f7d-image-20210811084828473-07add3.png"/>
+</div>
 
 
 ## 支持的图床
@@ -27,7 +29,7 @@ PyPicGo 是参考[PicGo](https://github.com/PicGo/PicGo-Core)开发的一款图�
 ```yaml
 uploader:
   name: gitee # 图传名称
-  module: uploaders.gitee.uploader.GiteeUploader # 上传插件模块
+  module: pypicgo.uploaders.gitee.uploader.GiteeUploader # 上传插件模块
   config: # 上传插件初始化配置
     domain: https://gitee.com
     owner: PyPicGo
@@ -36,13 +38,13 @@ uploader:
     img_path: PyPicGo
     access_token: xxxxxxxxxxxx
 plugins: # 插件列表
-  - module: plugins.rename.ReNamePlugin # 插件模块
+  - module: pypicgo.plugins.rename.ReNamePlugin # 插件模块
     config: # 插件配置
-  - module: plugins.notify.NotifyPlugin
+  - module: pypicgo.plugins.notify.NotifyPlugin
     config:
-  - module: plugins.clipboard.ClipBoardPlugin
+  - module: pypicgo.plugins.clipboard.ClipBoardPlugin
     config:
-  - module: plugins.typora.TyporaPlugin
+  - module: pypicgo.:：plugins.typora.TyporaPlugin
     config:
 ```
 
@@ -88,4 +90,9 @@ python setup.py sdist bdist_wheel
 ```shell
 cd ./dist
 python -m pip install pypicgo-*.whl
+```
+
+## 使用
+```shell
+pypicgo xxx.jpg
 ```

@@ -3,7 +3,7 @@ import sys
 from pypicgo.core.config import Settings
 from pypicgo.core.execute import create_uploader
 
-if __name__ == '__main__':
+def action():
     argv = sys.argv
     settings = Settings()
     uploader = settings.uploader_class
@@ -13,3 +13,6 @@ if __name__ == '__main__':
         files = argv[1:]
         for filepath in files:
             uploader.do(filepath)
+
+if __name__ == '__main__':
+    action()

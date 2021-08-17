@@ -6,8 +6,9 @@ setup(
     name='pypicgo',
     version='1.0',
     keywords=['python', 'pypicgo'],
-    description='client',
+    description='A simple & beautiful tool for pictures uploading built by python',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     license='MIT Licence', 
     url='https://github.com/AnsGoo/PyPicGo',
     author='ansgoo',
@@ -21,5 +22,26 @@ setup(
         'pyyaml',
         'requests',
         'requests-toolbelt'
-    ]
+    ],
+    entry_points={
+        'console_scripts': [
+            'pypicgo=pypicgo.upload:action'
+        ]
+    },
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: Unix',
+        'Operating System :: POSIX :: Linux',
+        'Environment :: Console',
+        'Environment :: MacOS X',
+        
+     ]
 )
