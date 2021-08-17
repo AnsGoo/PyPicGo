@@ -48,7 +48,7 @@ plugins: # 插件列表
 
 ## `Uploader`上传器
 
-uploader是具体的上传插件，用户需要继承`core.base.uploader.CommonUploader`并实现`upload`和`is_success`方法，然后在配置文件中引用即可.
+uploader是具体的上传插件，用户需要继承`pypicgo.core.base.uploader.CommonUploader`并实现`upload`和`is_success`方法，然后在配置文件中引用即可.
 
 ## 插件系统
 
@@ -56,9 +56,9 @@ PyPicgo支持的插件分为三种`before`、`after`和`final`
 
 |插件类型|运行时间|基类类|示例插件|运行时入参|
 |--|--|--|--|--|
-|before|在图片上传前运行|`core.base.plugin.BeforePlugin`|rename|File|
-|after|在图片上传前运行|`core.base.plugin.AfterPlugin`|notify|Result|
-|final|在图片上传前运行|`core.base.plugin.FinallyPlugin`|typora|List[Result]|
+|before|在图片上传前运行|`pypicgo.core.base.plugin.BeforePlugin`|rename|File|
+|after|在图片上传前运行|`pypicgo.core.base.plugin.AfterPlugin`|notify|Result|
+|final|在图片上传前运行|`pypicgo.core.base.plugin.FinallyPlugin`|typora|List[Result]|
 
 如果想自定义插件只要根据要求继承任意一个基类插件,并实现`execute`方法，并在`config.yml`中配置即可使用.
 
@@ -68,7 +68,24 @@ PyPicgo支持的插件分为三种`before`、`after`和`final`
 ```shell
 git clone git@github.com:AnsGoo/PyPicGo.git
 
+cd pypicgo
+
 pipenv shell
 
 pipenv install
+```
+
+## 打包
+
+```shell
+python setup.py sdist bdist_wheel
+```
+
+## 手动安装
+
+因为`PyPicGo`API 暂时不稳定，暂时不发布Pip包, 采用手动打包安装的方式进行尝鲜
+
+```shell
+cd ./dist
+python -m pip install pypicgo-*.whl
 ```
