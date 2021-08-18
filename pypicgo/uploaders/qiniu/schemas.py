@@ -1,7 +1,7 @@
 
 from typing import Optional, List
 from pydantic import BaseModel
-from pypicgo.core.models.__init__ import PluginModel
+from pypicgo.core.models import PluginModel
 
 
 class QiNiuUploaderConfig(BaseModel):

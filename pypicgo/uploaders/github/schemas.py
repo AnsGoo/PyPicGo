@@ -5,8 +5,7 @@ from pydantic import BaseModel, validator, ValidationError
 from pypicgo.core.models import PluginModel
 
 
-class GiteeUploaderData(BaseModel):
-    access_token: str
+class GithubUploaderData(BaseModel):
     message: str = 'pyPicGo upload success'
     content: str
 
@@ -21,13 +20,11 @@ class GiteeUploaderData(BaseModel):
             raise ValidationError('Non-base64 digit found')
 
 
-class GiteeUploaderConfig(BaseModel):
+class GithubUploaderConfig(BaseModel):
     domain: str
     owner: str
     repo: str
     branch: Optional[str] = 'master'
     img_path: str
-    access_token: str
+    oauth_token: str
     plugins: Optional[List[PluginModel]] = []
-
-

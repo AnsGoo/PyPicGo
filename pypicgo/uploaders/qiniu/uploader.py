@@ -1,6 +1,4 @@
-import base64
 import requests
-import yaml
 import json
 import random
 import hmac
@@ -8,10 +6,8 @@ import time
 from hashlib import sha1
 from typing import List, Optional, Tuple, Dict
 from requests import Response
-from pathlib import Path
 from pypicgo.core.base.uploader import CommonUploader
 from pypicgo.core.models import PluginModel
-from .schemas import QiNiuUploaderConfig
 from pypicgo.core.logger import logger
 from .utils import urlsafe_base64_encode
 

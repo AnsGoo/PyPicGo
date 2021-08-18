@@ -1,6 +1,6 @@
 uploader:
   name: qiniu
-  moduele: uploaders.qiniu.uploader.QiNiuUploader
+  moduele: pypicgo.uploaders.qiniu.uploader.QiNiuUploader
   config:
     domain: http://demo.pypicho.com/
     bucket_name: pypicgo
@@ -9,7 +9,7 @@ uploader:
     access_key: xxx
     secret_key:  xxxx
 plugins:
-  - module: plugins.rename.ReNamePlugin
+  - module: pypicgo.plugins.rename.ReNamePlugin
     config:
 
 

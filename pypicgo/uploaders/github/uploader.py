@@ -3,27 +3,26 @@ import requests
 import json
 from typing import List, Optional, Tuple
 from requests import Response
-from requests_toolbelt import MultipartEncoder
 from pypicgo.core.base.uploader import CommonUploader
 from pypicgo.core.models import PluginModel
-from .schemas import GiteeUploaderData
+from .schemas import GithubUploaderData
 from pypicgo.core.logger import logger
 
 
-class GiteeUploader(CommonUploader):
-    name: str = 'giteeUploader'
-    domain: str
+class GithubUploader(CommonUploader):
+    name: str = 'githubUploader'
+    domain: 'https://api.github.com'
     owner: str
     repo: str
     branch: str = 'master'
     img_path: str
-    access_token: str
+    oauth_token: str
 
     def __init__(self, domain: str,
                  owner: str,
                  repo: str,
                  img_path: str,
-                 access_token: str,
+                 oauth_token: str,
                  plugins: List[PluginModel],
                  branch: Optional[str] = 'master'):
 
@@ -32,7 +31,7 @@ class GiteeUploader(CommonUploader):
             owner=owner,
             repo=repo,
             img_path=img_path,
-            access_token=access_token,
+            oauth_token=oauth_token,
             plugins=plugins,
             branch=branch
         )
@@ -42,43 +41,41 @@ class GiteeUploader(CommonUploader):
                     owner: str,
                     repo: str,
                     img_path: str,
-                    access_token: str,
+                    oauth_token: str,
                     branch: Optional[str] = 'master'
                     ):
         self.repo = repo
         self.owner = owner
         self.img_path = img_path
         self.domain = domain
-        self.access_token = access_token
+        self.oauth_token = oauth_token
         self.branch = branch
 
         logger.info('load config successfully')
 
     @property
     def base_url(self):
-        return f'{self.domain}/api/v5/repos/{self.owner}/{self.repo}'
+        return f'{self.domain}/repos/{self.owner}/{self.repo}'
 
     def _upload_path(self, filename):
         return f'{self.base_url}/contents/{self.img_path}/{filename}'
 
-    def _get_upload_data(self) -> GiteeUploaderData:
+    def _get_upload_data(self) -> GithubUploaderData:
         with open(self.file.tempfile.resolve(), 'rb') as f:
             base64_data = base64.b64encode(f.read())
             filedata = str(base64_data, encoding='utf-8')
-        return GiteeUploaderData(
-            access_token=self.access_token,
+        return GithubUploaderData(
             content=filedata
         )
 
     def upload(self) -> Response:
         filename = self.file.filename
         data = json.loads(self._get_upload_data().json())
-        form_data = MultipartEncoder(data)
-        headers = {'Content-Type': form_data.content_type}
-        self.resp = requests.post(
+        headers = {'Authorization': f'token  {self.oauth_token}'}
+        self.resp = requests.put(
             url=self._upload_path(filename),
             headers=headers,
-            data=form_data
+            data=data
         )
 
         return self.resp
