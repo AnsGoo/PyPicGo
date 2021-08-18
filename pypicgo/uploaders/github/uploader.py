@@ -70,14 +70,14 @@ class GithubUploader(CommonUploader):
 
     def upload(self) -> Response:
         filename = self.file.filename
-        data = json.loads(self._get_upload_data().json())
+        data = self._get_upload_data().json()
         headers = {'Authorization': f'token  {self.oauth_token}'}
+
         self.resp = requests.put(
             url=self._upload_path(filename),
             headers=headers,
             data=data
         )
-
         return self.resp
 
     def is_success(self, resp: Response) -> Tuple[bool, str]:
