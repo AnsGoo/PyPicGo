@@ -4,7 +4,7 @@ from .clipbrd import ClipBoard
 
 
 class ClipBoardPlugin(AfterPlugin):
-    name = 'Notify'
+    name = 'ClipBoard'
 
     def execute(self, result: Result):
         if result.status:

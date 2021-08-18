@@ -1,10 +1,8 @@
 import time
+import datetime
 import logging
 from logging.handlers import TimedRotatingFileHandler
-import datetime
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent.parent
+from pypicgo import BASE_DIR
 
 LOG_PATH = BASE_DIR.joinpath('logs')
 if not LOG_PATH.exists():

@@ -65,7 +65,7 @@ class CommonUploader(BaseUploader):
                 elif issubclass(module, FinallyPlugin):
                     self._final_plugins.append((module(**config)))
             except ImportError:
-                continue
+                logger.warning(f'loader {plugin.module} plugins failed,please check the plugin config')
         logger.info('loader plugins successfully')
 
     def execute_before_plugins(self) -> UploadFile:

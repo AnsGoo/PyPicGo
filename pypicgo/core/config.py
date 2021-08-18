@@ -1,10 +1,9 @@
-import os
-import platform
 import yaml
 from pathlib import Path
 from typing import ClassVar, Dict, List
 from pypicgo.core.models import ConfigModel, PluginModel
 from pypicgo.core.utils.modules import import_string
+from pypicgo import BASE_DIR
 
 template = '''
 uploader:
@@ -14,18 +13,6 @@ uploader:
 plugins:
   - module: pypicgo.plugins.rename.ReNamePlugin
 '''
-system_name = platform.system().lower()
-
-if system_name == 'linux':
-    HOME = os.environ.get('HOME')
-    home = Path(HOME)
-elif system_name == 'windows':
-    HOMEDRIVE = os.environ.get('HOMEDRIVE')
-    HOME = os.environ.get('HOMEPATH')
-    home = Path(HOMEDRIVE).joinpath(HOME)
-BASE_DIR = home.joinpath('.PyPicGO')
-if not BASE_DIR.exists():
-    BASE_DIR.mkdir(parents=True)
 
 class Settings:
     CONFIG_DIR: Path = BASE_DIR
@@ -48,7 +35,11 @@ class Settings:
         with open(config_file.resolve(), 'r', encoding='utf-8') as f:
             config = yaml.load(f.read(), Loader=yaml.CFullLoader)
             model = ConfigModel(uploader=config['uploader'], plugins=config.get('plugins', []))
-            self.uploader_class = import_string(model.uploader.module)
+            try:
+                module = model.uploader.module
+                self.uploader_class = import_string(module)
+            except ImportError:
+                raise ImportError(f'uploader {module} doesnt look like a module path')
             self.uploader_config = model.uploader.config
             self.plugins = model.plugins
 
