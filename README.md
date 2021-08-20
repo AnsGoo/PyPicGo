@@ -74,7 +74,7 @@ pipenv shell
 
 pipenv install
 
-python run  xxx.jpg
+python run.py  xxx.jpg
 ```
 
 ## 打包
@@ -93,6 +93,7 @@ python -m pip install pypicgo-*.whl
 ```
 
 ## 使用
+
 ```shell
 pypicgo xxx.jpg
 ```
