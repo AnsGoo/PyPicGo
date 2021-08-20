@@ -2,10 +2,8 @@ uploader:
   name: gitee
   module: pypicgo.uploaders.gitee.uploader.GiteeUploader
   config:
-    domain: https://api.github.com
     owner: Ranger313
     repo: pbed
-    branch: master
     img_path: PyPicGo
     oauth_token:  xxx
 plugins:

@@ -51,7 +51,8 @@ class QiNiuUploader(CommonUploader):
                  apis: List[str],
                  access_key: str,
                  secret_key: str,
-                 plugins: Optional[List[PluginModel]] = []):
+                 plugins: Optional[List[PluginModel]] = [],
+                 **kwargs):
         super().__init__(
             bucket_name=bucket_name,
             apis=apis,
@@ -59,6 +60,7 @@ class QiNiuUploader(CommonUploader):
             domain=domain,
             secret_key=secret_key.encode('utf-8'),
             plugins=plugins,
+            **kwargs
 
         )
 
@@ -68,7 +70,7 @@ class QiNiuUploader(CommonUploader):
                       apis: List[str],
                       access_key: str,
                       secret_key: bytes,
-                      plugins: Optional[List[PluginModel]] = []
+                      **kwargs
                       ):
         self.bucket_name = bucket_name
         self.apis = apis

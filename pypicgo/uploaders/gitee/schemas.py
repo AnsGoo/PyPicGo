@@ -22,10 +22,8 @@ class GiteeUploaderData(BaseModel):
 
 
 class GiteeUploaderConfig(BaseModel):
-    domain: str
     owner: str
     repo: str
-    branch: Optional[str] = 'master'
     img_path: str
     access_token: str
     plugins: Optional[List[PluginModel]] = []

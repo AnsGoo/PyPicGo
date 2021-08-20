@@ -21,10 +21,8 @@ class GithubUploaderData(BaseModel):
 
 
 class GithubUploaderConfig(BaseModel):
-    domain: str
     owner: str
     repo: str
-    branch: Optional[str] = 'master'
     img_path: str
     oauth_token: str
     plugins: Optional[List[PluginModel]] = []

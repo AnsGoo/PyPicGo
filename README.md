@@ -31,10 +31,8 @@ uploader:
   name: gitee # 图传名称
   module: pypicgo.uploaders.gitee.uploader.GiteeUploader # 上传插件模块
   config: # 上传插件初始化配置
-    domain: https://gitee.com
     owner: PyPicGo
     repo: PyPicGo
-    branch: master
     img_path: PyPicGo
     access_token: xxxxxxxxxxxx
 plugins: # 插件列表

@@ -17,11 +17,11 @@ setup(
     include_package_data=True,
     platforms='any',
     install_requires=[
-        'Pillow',
-        'pydantic',
-        'pyyaml',
-        'requests',
-        'requests-toolbelt'
+        'pydantic>=1.7.4',
+        'pyyaml>=5.3.1',
+        'requests>=2.22.0',
+        'requests-toolbelt>=0.9.1',
+        'Pillow>=8.2.0'
     ],
     entry_points={
         'console_scripts': [
@@ -42,6 +42,5 @@ setup(
         'Operating System :: POSIX :: Linux',
         'Environment :: Console',
         'Environment :: MacOS X',
-        
      ]
 )

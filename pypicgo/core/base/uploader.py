@@ -101,14 +101,11 @@ class CommonUploader(BaseUploader):
         resp = self.upload()
         status, message = self.is_success(resp)
         result = Result(status=status, resp=resp, file=file, message=message)
-        self.result = result
         self.results.append(result)
-        if isinstance(self.result.resp, Response):
+        if isinstance(result.resp, Response):
             self.execute_after_plugins(result)
+        if not self.file.origin_file.resolve() == self.file.tempfile.resolve():
+            os.remove(self.file.tempfile.resolve())
 
     def final(self):
-        if self.result:
-            if isinstance(self.result.resp, Response):
-                self.execute_final_plugins(self.results)
-                if not self.file.origin_file.resolve() == self.file.tempfile.resolve():
-                    os.remove(self.file.tempfile.resolve())
+        self.execute_final_plugins(self.results)

@@ -12,45 +12,41 @@ from pypicgo.core.logger import logger
 
 class GiteeUploader(CommonUploader):
     name: str = 'giteeUploader'
-    domain: str
+    domain: str = 'https://gitee.com'
     owner: str
     repo: str
-    branch: str = 'master'
     img_path: str
     access_token: str
 
-    def __init__(self, domain: str,
+    def __init__(self,
                  owner: str,
                  repo: str,
                  img_path: str,
                  access_token: str,
                  plugins: List[PluginModel],
-                 branch: Optional[str] = 'master'):
+                 **kwargs
+                 ):
 
         super().__init__(
-            domain=domain,
             owner=owner,
             repo=repo,
             img_path=img_path,
             access_token=access_token,
             plugins=plugins,
-            branch=branch
+            **kwargs
         )
 
     def load_config(self,
-                    domain: str,
                     owner: str,
                     repo: str,
                     img_path: str,
                     access_token: str,
-                    branch: Optional[str] = 'master'
+                    **kwargs
                     ):
         self.repo = repo
         self.owner = owner
         self.img_path = img_path
-        self.domain = domain
         self.access_token = access_token
-        self.branch = branch
 
         logger.info('load config successfully')
 
