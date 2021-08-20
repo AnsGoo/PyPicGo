@@ -73,6 +73,8 @@ cd pypicgo
 pipenv shell
 
 pipenv install
+
+python run  xxx.jpg
 ```
 
 ## 打包
