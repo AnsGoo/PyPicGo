@@ -1,15 +1,19 @@
 from base64 import urlsafe_b64encode
+
 _BLOCK_SIZE = 1024 * 1024 * 4
+
 
 def b(data):
     if isinstance(data, str):
         return data.encode('utf-8')
     return data
 
+
 def s(data):
     if isinstance(data, bytes):
         data = data.decode('utf-8')
     return data
+
 
 def urlsafe_base64_encode(data):
     """urlsafe的base64编码:

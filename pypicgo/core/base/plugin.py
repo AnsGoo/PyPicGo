@@ -4,7 +4,6 @@ from pypicgo.core.base.file import UploadFile
 from pypicgo.core.exceptions import NotImplementedException
 
 
-
 class BasePlugin:
     name = 'base_plugin'
 

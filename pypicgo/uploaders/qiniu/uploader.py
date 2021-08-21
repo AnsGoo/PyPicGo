@@ -65,13 +65,13 @@ class QiNiuUploader(CommonUploader):
         )
 
     def load_config(self,
-                      domain: str,
-                      bucket_name: str,
-                      apis: List[str],
-                      access_key: str,
-                      secret_key: bytes,
-                      **kwargs
-                      ):
+                    domain: str,
+                    bucket_name: str,
+                    apis: List[str],
+                    access_key: str,
+                    secret_key: bytes,
+                    **kwargs
+                    ):
         self.bucket_name = bucket_name
         self.apis = apis
         self.access_key = access_key

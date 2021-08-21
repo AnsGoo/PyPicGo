@@ -6,7 +6,7 @@ from pypicgo.core.base.result import Result
 class NotifyPlugin(AfterPlugin):
     name = 'Notify'
 
-    def execute(self, result:Result):
+    def execute(self, result: Result):
         message = result.message
         if result.status:
             message = f'{result.file.origin_file.name} 已上传成功'

@@ -1,7 +1,6 @@
 import base64
 import requests
-import json
-from typing import List, Optional, Tuple
+from typing import List, Tuple
 from requests import Response
 from pypicgo.core.base.uploader import CommonUploader
 from pypicgo.core.models import PluginModel
@@ -23,7 +22,7 @@ class GithubUploader(CommonUploader):
                  img_path: str,
                  oauth_token: str,
                  plugins: List[PluginModel],
-                **kwargs):
+                 **kwargs):
 
         super().__init__(
             owner=owner,

@@ -1,4 +1,4 @@
-from typing import  ClassVar, Dict, List
+from typing import ClassVar, Dict, List
 from pypicgo.core.base.uploader import CommonUploader
 from pypicgo.core.logger import logger
 from pypicgo.core.exceptions import UploaderTypeException
@@ -20,9 +20,3 @@ class create_uploader:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.uploader.final()
-
-
-
-
-
-

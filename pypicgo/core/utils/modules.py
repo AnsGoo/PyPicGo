@@ -1,5 +1,6 @@
 from importlib import import_module
 
+
 def import_string(dotted_path):
     """
     Import a dotted module path and return the attribute/class designated by the
@@ -17,4 +18,4 @@ def import_string(dotted_path):
     except AttributeError as err:
         raise ImportError('Module "%s" does not define a "%s" attribute/class' % (
             module_path, class_name)
-        ) from err
+                          ) from err

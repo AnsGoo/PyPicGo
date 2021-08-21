@@ -14,6 +14,7 @@ plugins:
   - module: pypicgo.plugins.rename.ReNamePlugin
 '''
 
+
 class Settings:
     CONFIG_DIR: Path = BASE_DIR
     uploader_class: ClassVar
@@ -42,8 +43,3 @@ class Settings:
                 raise ImportError(f'uploader {module} doesnt look like a module path')
             self.uploader_config = model.uploader.config
             self.plugins = model.plugins
-
-
-
-
-

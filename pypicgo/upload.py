@@ -1,8 +1,8 @@
-
 import sys
 from pypicgo.core.config import Settings
 from pypicgo.core.execute import create_uploader
 from pypicgo.core.logger import logger
+
 
 def action():
     argv = sys.argv
@@ -17,6 +17,7 @@ def action():
             files = argv[1:]
             for filepath in files:
                 uploader.do(filepath)
+
 
 if __name__ == '__main__':
     action()
