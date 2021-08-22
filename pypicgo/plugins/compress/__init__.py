@@ -26,6 +26,6 @@ class Compress(BeforePlugin):
         after_filepath = after_filepath.joinpath(filename)
 
         img.resize((after_width, after_height), Image.ANTIALIAS)
-        img.save(after_filepath.resolve(), quality=95, subsampling=0)
+        img.save(after_filepath.resolve(), quality=95)
         file.tempfile = after_filepath
         return file

@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
-with open('README.md', 'r', encoding='utf-8') as fh:
+with open('README.rst', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 setup(
     name='pypicgo',
-    version='1.0.0',
+    version='1.0.1',
     keywords=['python', 'pypicgo'],
     description='A simple & beautiful tool for pictures uploading built by python',
     long_description=long_description,

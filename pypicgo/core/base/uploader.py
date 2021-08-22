@@ -94,11 +94,15 @@ class CommonUploader(BaseUploader):
         self.file = file
         self.execute_before_plugins()
         self.result = self.upload()
-        self.results.append(self.result)
-        if self.result.status is not None:
-            self.execute_after_plugins(self.result)
-        if not self.file.origin_file.resolve() == self.file.tempfile.resolve():
-            os.remove(self.file.tempfile.resolve())
+        if isinstance(self.result, Result):
+            self.results.append(self.result)
+            if self.result.status is not None:
+                self.execute_after_plugins(self.result)
+            if not self.file.origin_file.resolve() == self.file.tempfile.resolve():
+                os.remove(self.file.tempfile.resolve())
+        else:
+            logger.warn(f'upload method of [{self.name}] uploader must return a Result object')
+            raise Exception(f'upload method of [{self.name}] uploader must return a Result object')
 
     def final(self):
         self.execute_final_plugins(self.results)

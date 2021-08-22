@@ -1,31 +1,16 @@
 # PyPicGo
 
-PyPicGo 是参考[PicGo](https://github.com/PicGo/PicGo-Core)开发的一款图床上传的图传工具，并支持各种插件自定义插件，目前PyPicGo自带了`gitee`和`七牛云`图传，和`rename`、`notify`和`typora`等插件，并支持从`pypi`中下载其他插件和`Uploader`。
+PyPicGo 是参考[PicGo](https://github.com/PicGo/PicGo-Core)开发的一款图床上传的图传工具，并支持各种插件自定义插件，目前PyPicGo自带了`gitee`、`github`和`七牛云`图传，和`rename`、`notify`和`typora`等插件，并支持从`pypi`中下载其他插件和`Uploader`。
 
-## PyPicGo 流程图
+## 安装
 
-<div align=center>
-<img src="https://gitee.com/Ranger313/pbed/raw/master/img/ce9da59dc0436393cd8cca6b66a14f7d-image-20210811084828473-07add3.png"/>
-</div>
+```shell
+pip install pypicgo
+```
 
+## 配置
 
-## 支持的图床
-
-- `gitee` 支持
-- `七牛云` 支持
-- `github` 支持
-
-## 支持的插件
-
-|插件名称|用途|windows|linux|mac|
-|--|--|--|--|--|
-|rename|上传前重命名图片|支持|支持|支持|
-|notify|上传成功失败的系统通知|支持|待测试|待测试|
-|typora|typora编辑器支持|支持|支持|支持|
-
-## 配置文件
-
-配置文件位于`/$HOME/.PyPicGO/config.yml`目录下，采用`YAML`的方式进行配置。
+配置文件位于`/$HOME/.PyPicGO/config.yml`目录下，采用`YAML`的方式进行配置。必须配置上传器`uploader`,插件`plugins`的数量可选
 
 ```yaml
 uploader:
@@ -40,12 +25,34 @@ plugins: # 插件列表
   - module: pypicgo.plugins.rename.ReNamePlugin # 插件模块
     config: # 插件配置
   - module: pypicgo.plugins.notify.NotifyPlugin
-    config:
   - module: pypicgo.plugins.clipboard.ClipBoardPlugin
-    config:
   - module: pypicgo.plugins.typora.TyporaPlugin
-    config:
 ```
+
+更多的配置说明参考文档
+
+## 使用
+
+```shell
+pypicgo xxx.jpg
+```
+
+## 支持的图床
+
+|图床名|模块地址|
+|---|--|
+| `gitee`|`pypicgo.uploaders.gitee.uploader.GiteeUploader`|
+| `七牛云`|`pypicgo.uploaders.github.uploader.QiNiuUploader`|
+| `github`|`pypicgo.uploaders.qiniu.uploader.GithubUploader`|
+
+## 支持的插件
+
+|插件名称|用途|windows|linux|mac|
+|--|--|--|--|--|
+|rename|上传前重命名图片|支持|支持|支持|
+|notify|上传成功失败的系统通知|支持|支持|支持|
+|typora|typora编辑器支持|支持|支持|支持|
+|compress|图片上传前压缩|支持|支持|支持|
 
 ## `Uploader`上传器
 
@@ -76,25 +83,4 @@ pipenv shell
 pipenv install
 
 python run.py  xxx.jpg
-```
-
-## 打包
-
-```shell
-python setup.py sdist bdist_wheel
-```
-
-## 手动安装
-
-因为`PyPicGo`API 暂时不稳定，暂时不发布Pip包, 采用手动打包安装的方式进行尝鲜
-
-```shell
-cd ./dist
-python -m pip install pypicgo-*.whl
-```
-
-## 使用
-
-```shell
-pypicgo xxx.jpg
 ```

@@ -1,6 +1,6 @@
 uploader:
-  name: gitee
-  module: pypicgo.uploaders.gitee.uploader.GiteeUploader
+  name: github
+  module: pypicgo.uploaders.github.uploader.GithubUploader
   config:
     owner: Ranger313
     repo: pbed
