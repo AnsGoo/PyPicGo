@@ -13,6 +13,7 @@ PyPicGo 是参考[PicGo](https://github.com/PicGo/PicGo-Core)开发的一款图�
 
 - `gitee` 支持
 - `七牛云` 支持
+- `github` 支持
 
 ## 支持的插件
 
@@ -48,7 +49,7 @@ plugins: # 插件列表
 
 ## `Uploader`上传器
 
-uploader是具体的上传插件，用户需要继承`pypicgo.core.base.uploader.CommonUploader`并实现`upload`和`is_success`方法，然后在配置文件中引用即可.
+uploader是具体的上传插件，用户需要继承`pypicgo.core.base.uploader.CommonUploader`并实现`upload`方法，然后在配置文件中引用即可.
 
 ## 插件系统
 
