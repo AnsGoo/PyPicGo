@@ -6,6 +6,7 @@ from requests import Response
 from requests_toolbelt import MultipartEncoder
 from pypicgo.core.base.uploader import CommonUploader
 from pypicgo.core.models import PluginModel
+from pypicgo.core.base.result import Result
 from .schemas import GiteeUploaderData
 from pypicgo.core.logger import logger
 
@@ -66,24 +67,25 @@ class GiteeUploader(CommonUploader):
             content=filedata
         )
 
-    def upload(self) -> Response:
+    def upload(self) -> Result:
         filename = self.file.filename
         data = json.loads(self._get_upload_data().json())
         form_data = MultipartEncoder(data)
         headers = {'Content-Type': form_data.content_type}
-        self.resp = requests.post(
+        resp = requests.post(
             url=self._upload_path(filename),
             headers=headers,
             data=form_data
         )
+        result = self.is_success(resp)
 
-        return self.resp
+        return result
 
-    def is_success(self, resp: Response) -> Tuple[bool, str]:
+    def is_success(self, resp: Response) -> Result:
         if resp.status_code == 201:
-            result = resp.json()['content']['download_url']
-            return True, result
+            download_url = resp.json()['content']['download_url']
+            return Result(status=True, file=self.file, message=download_url)
         else:
             reason = resp.json().get('message')
             logger.warning(f'upload fail, message:{reason}')
-            return False, reason
+            return Result(status=False, file=self.file, message=reason)

@@ -1,19 +1,15 @@
 from pypicgo.core.base.file import UploadFile
-from requests import Response
 
 
 class Result:
     _status: bool
-    _resp: Response
     _file: UploadFile
     _message: str
 
     def __init__(self, status: bool,
-                 resp: Response,
                  file: UploadFile,
                  message: str):
         self.status = status
-        self.resp = resp
         self.file = file
         self.message = message
 
@@ -38,17 +34,6 @@ class Result:
             self._file = file
         else:
             raise ValueError('file must be UploadFile')
-
-    @property
-    def resp(self) -> Response:
-        return self._resp
-
-    @resp.setter
-    def resp(self, resp: Response):
-        if isinstance(resp, Response):
-            self._resp = resp
-        else:
-            raise ValueError('resp must be response')
 
     @property
     def message(self) -> str:

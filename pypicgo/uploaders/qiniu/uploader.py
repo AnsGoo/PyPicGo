@@ -4,10 +4,11 @@ import random
 import hmac
 import time
 from hashlib import sha1
-from typing import List, Optional, Tuple, Dict
+from typing import List, Optional, Dict
 from requests import Response
 from pypicgo.core.base.uploader import CommonUploader
 from pypicgo.core.models import PluginModel
+from pypicgo.core.base.result import Result
 from pypicgo.core.logger import logger
 from .utils import urlsafe_base64_encode
 
@@ -105,25 +106,27 @@ class QiNiuUploader(CommonUploader):
         data = json.dumps(args, separators=(',', ':'))
         return self.__token_with_data(data)
 
-    def upload(self) -> Response:
+    def upload(self) -> Result:
         fields = dict()
         filename = self.file.filename
         token = self.get_token(self.bucket_name, {'fileType': 1})
         fields['token'] = token
         fields['key'] = filename
         with open(self.file.tempfile.resolve(), 'rb') as f:
-            self.resp = requests.post(
+            resp = requests.post(
                 url=self.api,
                 data=fields,
                 files={'file': ('file_name', f, 'application/octet-stream')}
             )
 
-        return self.resp
+        result = self.is_success(resp=resp)
+        return result
 
-    def is_success(self, resp: Response) -> Tuple[bool, str]:
+    def is_success(self, resp: Response) -> Result:
         if resp.status_code == 200:
             key = resp.json()['key']
-            return True, f'{self.domain}{key}'
+            remote_file = f'{self.domain}{key}'
+            return Result(status=True, file=self.file, message=remote_file)
         else:
             reason = resp.text
             try:
@@ -131,4 +134,4 @@ class QiNiuUploader(CommonUploader):
             except:
                 pass
             logger.warning(f'upload fail, message:{reason}')
-            return False, reason
+            return Result(status=False, file=self.file, message=reason)

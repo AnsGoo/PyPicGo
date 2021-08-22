@@ -1,6 +1,7 @@
 import base64
+from pypicgo.core.base.result import Result
 import requests
-from typing import List, Tuple
+from typing import List
 from requests import Response
 from pypicgo.core.base.uploader import CommonUploader
 from pypicgo.core.models import PluginModel
@@ -62,23 +63,25 @@ class GithubUploader(CommonUploader):
             content=filedata
         )
 
-    def upload(self) -> Response:
+    def upload(self) -> Result:
         filename = self.file.filename
         data = self._get_upload_data().json()
         headers = {'Authorization': f'token  {self.oauth_token}'}
 
-        self.resp = requests.put(
+        resp = requests.put(
             url=self._upload_path(filename),
             headers=headers,
             data=data
         )
-        return self.resp
+        result = self.is_success(resp)
+        return result
 
-    def is_success(self, resp: Response) -> Tuple[bool, str]:
+
+    def is_success(self, resp: Response) -> Result:
         if resp.status_code == 201:
-            result = resp.json()['content']['download_url']
-            return True, result
+            download_url = resp.json()['content']['download_url']
+            return Result(status=True, file=self.file, message=download_url)
         else:
             reason = resp.json().get('message')
             logger.warning(f'upload fail, message:{reason}')
-            return False, reason
+            return Result(status=False, file=self.file, message=reason)

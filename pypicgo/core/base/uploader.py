@@ -1,5 +1,4 @@
 import os
-from requests import Response
 from typing import List, Any
 
 from pypicgo.core.base.plugin import BeforePlugin, AfterPlugin, FinallyPlugin
@@ -21,7 +20,6 @@ class CommonUploader(BaseUploader):
     _after_plugins: List[Any] = []
     _before_plugins: List[Any] = []
     _final_plugins: List[Any] = []
-    resp = None
     file = None
     result = None
     results: List[Result] = []
@@ -41,13 +39,10 @@ class CommonUploader(BaseUploader):
         self.plugins = plugins
         self.load_config(**kwargs)
 
-    def upload(self) -> Response:
+    def upload(self) -> Result:
         raise NotImplementedException()
 
     def load_config(self, **kwargs):
-        raise NotImplementedException()
-
-    def is_success(self, resp: Response):
         raise NotImplementedException()
 
     def get_plugins(self):
@@ -89,7 +84,7 @@ class CommonUploader(BaseUploader):
     def execute_final_plugins(self, results: List[Result]):
         for plugin in self._final_plugins:
             try:
-                self.resp = plugin.execute(results)
+                plugin.execute(results)
                 logger.info(f'plugins [{plugin.name}] execute successfully')
             except PluginExecuteException as e:
                 logger.warning(f'plugins [{plugin.name}] execute fail')
@@ -98,12 +93,10 @@ class CommonUploader(BaseUploader):
         file = UploadFile(filepath)
         self.file = file
         self.execute_before_plugins()
-        resp = self.upload()
-        status, message = self.is_success(resp)
-        result = Result(status=status, resp=resp, file=file, message=message)
-        self.results.append(result)
-        if isinstance(result.resp, Response):
-            self.execute_after_plugins(result)
+        self.result = self.upload()
+        self.results.append(self.result)
+        if self.result.status is not None:
+            self.execute_after_plugins(self.result)
         if not self.file.origin_file.resolve() == self.file.tempfile.resolve():
             os.remove(self.file.tempfile.resolve())
 

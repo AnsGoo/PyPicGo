@@ -18,7 +18,7 @@ class ReNamePlugin(BeforePlugin):
         if not self.format:
             return file
         else:
-            variables, names = self.parse(self.format)
+            names = self.parse(self.format)
             func_map = self.get_variable_func()
             for index in range(len(names)):
                 name = names[index]
@@ -62,6 +62,6 @@ class ReNamePlugin(BeforePlugin):
         return func_map
 
     def parse(self, format: str):
-        variables = re.findall(r'[{](.*?)[}]', format)
+        # variables = re.findall(r'[{](.*?)[}]', format)
         names = re.split(r'[{}]', format)
-        return variables, names
+        return names
