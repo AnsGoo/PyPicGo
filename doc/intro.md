@@ -20,6 +20,7 @@
 | `gitee`|`pypicgo.uploaders.gitee.uploader.GiteeUploader`|
 | `七牛云`|`pypicgo.uploaders.github.uploader.QiNiuUploader`|
 | `github`|`pypicgo.uploaders.qiniu.uploader.GithubUploader`|
+| `SM.MS`|`pypicgo.uploaders.smms.uploader.SmmsUploader`|
 
 ## 插件 `Plugin`
 

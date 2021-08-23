@@ -44,6 +44,7 @@ pypicgo xxx.jpg
 | `gitee`|`pypicgo.uploaders.gitee.uploader.GiteeUploader`|
 | `七牛云`|`pypicgo.uploaders.github.uploader.QiNiuUploader`|
 | `github`|`pypicgo.uploaders.qiniu.uploader.GithubUploader`|
+| `SM.MS`|`pypicgo.uploaders.smms.uploader.SmmsUploader`|
 
 ## 支持的插件
 

@@ -1,0 +1,8 @@
+uploader:
+  name: smms
+  module: pypicgo.uploaders.smms.uploader.SmmsUploader
+  config:
+    secret_token:  xxx
+plugins:
+  - module: pypicgo.plugins.rename.ReNamePlugin
+    config:

@@ -34,3 +34,4 @@ pypicgo picture1 picture2 ...
 ```
 
 如果系统找不到`pypicgo`，请检查`python`的`Scripts`文件夹是否被加入`Path`环境变量
+
