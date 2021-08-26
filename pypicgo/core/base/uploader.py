@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from typing import List, Any
 
 from pypicgo.core.base.plugin import BeforePlugin, AfterPlugin, FinallyPlugin
@@ -86,11 +87,30 @@ class CommonUploader(BaseUploader):
             except PluginExecuteException as e:
                 logger.warning(f'plugins [{plugin.name}] execute fail')
 
-    def do(self, filepath):
+    def do(self, filepath: str):
         file = UploadFile(filepath)
         self.file = file
         self.execute_before_plugins()
-        self.result = self.upload()
+        try:
+            self.result = self.upload()
+            if isinstance(self.result, Result):
+                self.results.append(self.result)
+                if self.result.status is not None:
+                    self.execute_after_plugins(self.result)
+            else:
+                logger.warn(f'upload method of [{self.name}] uploader must return a Result object')
+        except Exception as e:
+            logger.warn(f'[{self.file.origin_file.resolve()}] upload fail')
+
+        self.clean_tempfile()
+    
+    def clean_tempfile(self):
+        if not self.file.origin_file.resolve() == self.file.tempfile.resolve():
+            os.remove(self.file.tempfile.resolve())
+
+
+    def final(self):
+        self.execute_final_plugins(self.results)
         if isinstance(self.result, Result):
             self.results.append(self.result)
             if self.result.status is not None:
@@ -100,6 +120,3 @@ class CommonUploader(BaseUploader):
         else:
             logger.warn(f'upload method of [{self.name}] uploader must return a Result object')
             raise Exception(f'upload method of [{self.name}] uploader must return a Result object')
-
-    def final(self):
-        self.execute_final_plugins(self.results)

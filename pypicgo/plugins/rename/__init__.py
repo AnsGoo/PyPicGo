@@ -24,8 +24,8 @@ class ReNamePlugin(BeforePlugin):
                 name = names[index]
                 if name in func_map:
                     names[index] = func_map[name](file)
-            filename = ''.join(names)
-            file.filename = f'{filename}{suffix}'
+            filename = f'{"".join(names)}{suffix}'
+            file.filename = filename
             return file
 
     def _date(self, file: UploadFile) -> str:

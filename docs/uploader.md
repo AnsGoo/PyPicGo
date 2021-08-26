@@ -121,13 +121,7 @@ uploader:
 
 - `secret_token`: SM.MS 图床Token
 
-配置说明：
-
-- `domain`: 自定义域名，没有可填测试域名，测试域名按月动态变更，不建议
-- `bucket_name`: 空间名
-- `apis`: 列表，可用的上床地址列表
-- `access_key`: AK
-- `secret_key`: SK
+**Notice:**: `SM.MS` 图床不支持自定义文件名，`SM.M`S图床的文件名是以服务器的对该张图生成的`Hash`码为准，因此`rename`插件对该图床其实不生效
 
 ## 自定义上传器
 

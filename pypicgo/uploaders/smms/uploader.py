@@ -1,10 +1,14 @@
+import tempfile
 import requests
 from typing import List
+from pathlib import Path
 from requests import Response
 from pypicgo.core.base.result import Result
 from pypicgo.core.base.uploader import CommonUploader
 from pypicgo.core.models import PluginModel
 from pypicgo.core.logger import logger
+
+BASE_DIR = Path(__file__).resolve().parent
 
 
 class SmmsUploader(CommonUploader):
@@ -17,6 +21,7 @@ class SmmsUploader(CommonUploader):
                  **kwargs):
 
         self.secret_token =  secret_token
+        self.plugins = plugins
         logger.info('load config successfully')    
 
     @property
@@ -25,8 +30,14 @@ class SmmsUploader(CommonUploader):
 
 
     def upload(self) -> Result:
+        tempfile = BASE_DIR.joinpath(self.file.filename)
+        with open(self.file.tempfile.resolve(), 'rb') as f:
+            with open(tempfile.resolve(),'wb') as ft:
+                ft.write(f.read())
+        self.file.tempfile = tempfile
+        file = open(self.file.tempfile.resolve(), 'rb')
         files = {
-            'smfile': open(self.file.tempfile.resolve(), 'rb'),
+            'smfile': file,
         }
         headers = {'Authorization': f'{self.secret_token}'}
 
@@ -41,8 +52,22 @@ class SmmsUploader(CommonUploader):
 
     def is_success(self, resp: Response) -> Result:
         if resp.status_code == 200:
-            url = resp.json()['data']['url']
-            return Result(status=True, file=self.file, message=url)
+            data = resp.json()
+            print(data)
+            result = data.get('success')
+            if result:
+                url = resp.json()['data']['url']
+                return Result(status=True, file=self.file, message=url)
+            else:
+                code = data.get('code')
+                if code and code == 'image_repeated':
+                    url = data.get('images')
+                    print(url)
+                    return Result(status=True, file=self.file, message=url)
+                else:
+                    reason = data.get('message')
+                    return Result(status=False, file=self.file, message=reason)
+
         else:
             reason = resp.json().get('message')
             logger.warning(f'upload fail, message:{reason}')
