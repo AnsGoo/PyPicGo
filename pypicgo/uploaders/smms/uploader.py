@@ -53,7 +53,6 @@ class SmmsUploader(CommonUploader):
     def is_success(self, resp: Response) -> Result:
         if resp.status_code == 200:
             data = resp.json()
-            print(data)
             result = data.get('success')
             if result:
                 url = resp.json()['data']['url']
@@ -62,7 +61,6 @@ class SmmsUploader(CommonUploader):
                 code = data.get('code')
                 if code and code == 'image_repeated':
                     url = data.get('images')
-                    print(url)
                     return Result(status=True, file=self.file, message=url)
                 else:
                     reason = data.get('message')
