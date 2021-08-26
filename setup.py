@@ -6,7 +6,7 @@ setup(
     name='pypicgo',
     version='1.0.2',
     keywords=['python', 'pypicgo'],
-    description='A simple & beautiful tool for pictures uploading built by python',
+    description='A simple & powerful tool for pictures uploading built by python',
     long_description=long_description,
     long_description_content_type='text/markdown',
     license='MIT Licence', 

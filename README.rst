@@ -54,7 +54,7 @@ PyPicGo
 +--------------+-------------------------------------------------------+
 | ``github``   | ``pypicgo.uploaders.qiniu.uploader.GithubUploader``   |
 +--------------+-------------------------------------------------------+
-| ``SM.MS``   | ``pypicgo.uploaders.smms.uploader.SmmsUploader``   |
+| ``SM.MS``    | ``pypicgo.uploaders.smms.uploader.SmmsUploader``      |
 +--------------+-------------------------------------------------------+
 
 支持的插件
@@ -108,4 +108,3 @@ PyPicgo支持的插件分为三种\ ``before``\ 、\ ``after``\ 和\ ``final``
     pipenv install
 
     python run.py  xxx.jpg
-
