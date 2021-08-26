@@ -131,7 +131,7 @@ uploader:
 
 ## 自定义上传器
 
-自定义上传器继承`pypicgo.core.base.uploader.CommonUploader`并重写`load_config`和`upload`,并按需重写`__init__`方法即可，其中`load_config`在初始化参数，在`upload`方法中处理上传图片逻辑，`upload`方法必须返回一个`Result`对象
+自定义上传器继承`pypicgo.core.base.uploader.CommonUploader`,重写`upload`,并按需重写`__init__`方法即可，`upload`方法为处理上传图片逻辑，`upload`方法必须返回一个`Result`对象
 
 ```python 
 from pypicgo.core.base.uploader import CommonUploader
@@ -141,12 +141,6 @@ class CustomeUploader(CommonUploader):
 
     def __init(self,...**kwargs):
         ...
-        self.load_config(...)
-
-    def load_config(self,.....):
-        ...
-
-
 
     def upload(self) -> Result:
         ...

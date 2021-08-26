@@ -28,26 +28,11 @@ class GiteeUploader(CommonUploader):
                  **kwargs
                  ):
 
-        super().__init__(
-            owner=owner,
-            repo=repo,
-            img_path=img_path,
-            access_token=access_token,
-            plugins=plugins,
-            **kwargs
-        )
-
-    def load_config(self,
-                    owner: str,
-                    repo: str,
-                    img_path: str,
-                    access_token: str,
-                    **kwargs
-                    ):
         self.repo = repo
         self.owner = owner
         self.img_path = img_path
         self.access_token = access_token
+        self.plugins = plugins
 
         logger.info('load config successfully')
 

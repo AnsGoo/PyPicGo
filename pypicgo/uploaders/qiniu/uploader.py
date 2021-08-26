@@ -45,8 +45,6 @@ class QiNiuUploader(CommonUploader):
     secret_key: bytes = b''
     bucket_name: str = ''
 
-    url = 'https://gitee.com/Ranger313/pbed/raw/master/img/CreateReport.png'
-
     def __init__(self, domain: str,
                  bucket_name: str,
                  apis: List[str],
@@ -54,30 +52,12 @@ class QiNiuUploader(CommonUploader):
                  secret_key: str,
                  plugins: Optional[List[PluginModel]] = [],
                  **kwargs):
-        super().__init__(
-            bucket_name=bucket_name,
-            apis=apis,
-            access_key=access_key,
-            domain=domain,
-            secret_key=secret_key.encode('utf-8'),
-            plugins=plugins,
-            **kwargs
-
-        )
-
-    def load_config(self,
-                    domain: str,
-                    bucket_name: str,
-                    apis: List[str],
-                    access_key: str,
-                    secret_key: bytes,
-                    **kwargs
-                    ):
         self.bucket_name = bucket_name
         self.apis = apis
         self.access_key = access_key
         self.domain = domain
         self.secret_key = secret_key
+        self.plugins = plugins
         logger.info('init settings successfully')
 
     @property

@@ -16,19 +16,8 @@ class SmmsUploader(CommonUploader):
                  plugins: List[PluginModel],
                  **kwargs):
 
-        super().__init__(
-            secret_token=secret_token,
-            plugins=plugins,
-            **kwargs
-        )
-
-    def load_config(self,
-                   secret_token: str,
-                    **kwargs
-                    ):
         self.secret_token =  secret_token
-
-        logger.info('load config successfully')
+        logger.info('load config successfully')    
 
     @property
     def upload_url(self):

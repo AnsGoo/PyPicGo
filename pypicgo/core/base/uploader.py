@@ -24,6 +24,10 @@ class CommonUploader(BaseUploader):
     result = None
     results: List[Result] = []
 
+
+    def __init__(self, plugins: List[PluginModel], **kwargs):
+        self.plugins = plugins
+
     @property
     def plugins(self):
         return self._plugins
@@ -35,14 +39,7 @@ class CommonUploader(BaseUploader):
         else:
             self._plugins = []
 
-    def __init__(self, plugins: List[PluginModel], **kwargs):
-        self.plugins = plugins
-        self.load_config(**kwargs)
-
     def upload(self) -> Result:
-        raise NotImplementedException()
-
-    def load_config(self, **kwargs):
         raise NotImplementedException()
 
     def get_plugins(self):
