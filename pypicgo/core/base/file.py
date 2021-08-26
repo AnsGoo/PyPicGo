@@ -1,3 +1,5 @@
+import os
+import hashlib
 from pathlib import Path
 from pypicgo.core.exceptions import (PathNotExistsException, IsNotFileException)
 from pypicgo.core.logger import logger
@@ -27,7 +29,10 @@ class UploadFile:
                 raise PathNotExistsException()
             if not file.is_file():
                 raise IsNotFileException()
-            self._tempfile = file
+            if self._tempfile.resolve() != file.resolve():
+                if self.origin_file.resolve() != self._tempfile.resolve():
+                    os.remove(self._tempfile.resolve())
+                self._tempfile = file
 
     def __str__(self):
         return self._tempfile.resolve()

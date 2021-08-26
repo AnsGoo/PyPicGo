@@ -101,22 +101,13 @@ class CommonUploader(BaseUploader):
                 logger.warn(f'upload method of [{self.name}] uploader must return a Result object')
         except Exception as e:
             logger.warn(f'[{self.file.origin_file.resolve()}] upload fail')
-
-        self.clean_tempfile()
     
-    def clean_tempfile(self):
-        if not self.file.origin_file.resolve() == self.file.tempfile.resolve():
-            os.remove(self.file.tempfile.resolve())
-
+    def clean_tempfile(self, file: Path):
+        if file.origin_file.resolve() != file.tempfile.resolve():
+            os.remove(file.tempfile.resolve())
 
     def final(self):
         self.execute_final_plugins(self.results)
-        if isinstance(self.result, Result):
-            self.results.append(self.result)
-            if self.result.status is not None:
-                self.execute_after_plugins(self.result)
-            if not self.file.origin_file.resolve() == self.file.tempfile.resolve():
-                os.remove(self.file.tempfile.resolve())
-        else:
-            logger.warn(f'upload method of [{self.name}] uploader must return a Result object')
-            raise Exception(f'upload method of [{self.name}] uploader must return a Result object')
+        for result in self.results:
+            self.clean_tempfile(result.file)
+
