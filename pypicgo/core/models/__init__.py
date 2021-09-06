@@ -8,7 +8,6 @@ class PluginModel(BaseModel):
 
 
 class UploaderModel(BaseModel):
-    name: str
     module: str
     config: Optional[Dict] = None
 

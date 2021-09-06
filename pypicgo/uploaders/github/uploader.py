@@ -63,9 +63,25 @@ class GithubUploader(CommonUploader):
 
     def is_success(self, resp: Response) -> Result:
         if resp.status_code == 201:
-            download_url = resp.json()['content']['download_url']
-            return Result(status=True, file=self.file, message=download_url)
+            origin_resp = resp.json()
+            download_url = origin_resp['content']['download_url']
+            return Result(
+                status=True, 
+                file=self.file, 
+                message='uload success', 
+                remote_url=download_url, 
+                origin_resp=origin_resp
+                )
         else:
-            reason = resp.json().get('message')
+            origin_resp = dict()
+            try:
+                origin_resp = resp.json()
+            except:
+                pass
+            reason = origin_resp.get('message', 'upload fail')
             logger.warning(f'upload fail, message:{reason}')
-            return Result(status=False, file=self.file, message=reason)
+            return Result(
+                status=False, 
+                file=self.file, 
+                message=reason,
+                )

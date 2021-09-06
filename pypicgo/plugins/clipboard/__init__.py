@@ -8,4 +8,4 @@ class ClipBoardPlugin(AfterPlugin):
 
     def execute(self, result: Result):
         if result.status:
-            ClipBoard.writer(result.message)
+            ClipBoard.writer(result.remote_url)

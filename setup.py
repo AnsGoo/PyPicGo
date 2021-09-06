@@ -4,7 +4,7 @@ with open('README.rst', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 setup(
     name='pypicgo',
-    version='1.0.2',
+    version='1.0.3',
     keywords=['python', 'pypicgo'],
     description='A simple & powerful tool for pictures uploading built by python',
     long_description=long_description,

@@ -11,7 +11,7 @@ elif system_name == 'windows':
     HOMEDRIVE = os.environ.get('HOMEDRIVE')
     HOME = os.environ.get('HOMEPATH')
     home = Path(HOMEDRIVE).joinpath(HOME)
-BASE_DIR = home.joinpath('.PyPicGO')
+BASE_DIR = home.joinpath('.PyPicGo')
 if not BASE_DIR.exists():
     BASE_DIR.mkdir(parents=True)
 

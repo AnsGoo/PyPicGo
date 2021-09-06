@@ -16,13 +16,13 @@ class NotExtendsException(BaseException):
 
 class PathNotExistsException(BaseException):
     def __str__(self):
-        return 'then path  is not exists'
+        return 'the path  is not exists'
 
 
 class IsNotFileException(BaseException):
 
     def __str__(self):
-        return 'then path is not file'
+        return 'the path is not file'
 
 
 class UploaderTypeException(BaseException):
@@ -35,3 +35,13 @@ class PluginExecuteException(BaseException):
 
     def __str__(self):
         return 'Plugin execute exception'
+
+
+class ConfigException(BaseException):
+    
+    def __init__(self,message, *args: object) -> None:
+        self.message = message
+        super().__init__(*args)
+
+    def __str__(self):
+        return self.message

@@ -1,3 +1,4 @@
+from typing import Dict, Optional
 from pypicgo.core.base.file import UploadFile
 
 
@@ -5,13 +6,19 @@ class Result:
     _status: bool
     _file: UploadFile
     _message: str
+    origin_resp: Dict
 
     def __init__(self, status: bool,
                  file: UploadFile,
-                 message: str):
-        self.status = status
-        self.file = file
-        self.message = message
+                 message: str,
+                 remote_url:str = None,
+                 origin_resp: Dict = dict()
+                 ):
+        self._status = status
+        self._file = file
+        self._message = message
+        self.remote_url = remote_url
+        self.origin_resp = origin_resp
 
     @property
     def status(self) -> bool:

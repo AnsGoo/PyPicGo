@@ -104,9 +104,16 @@ class QiNiuUploader(CommonUploader):
 
     def is_success(self, resp: Response) -> Result:
         if resp.status_code == 200:
-            key = resp.json()['key']
+            origin_resp = resp.json()
+            key = origin_resp['key']
             remote_file = f'{self.domain}{key}'
-            return Result(status=True, file=self.file, message=remote_file)
+            return Result(
+                status=True, 
+                file=self.file,
+                message='upload success',
+                remote_url=remote_file,
+                origin_resp=origin_resp
+                )
         else:
             reason = resp.text
             try:

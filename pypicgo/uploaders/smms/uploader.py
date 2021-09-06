@@ -52,21 +52,39 @@ class SmmsUploader(CommonUploader):
 
     def is_success(self, resp: Response) -> Result:
         if resp.status_code == 200:
-            data = resp.json()
-            result = data.get('success')
+            origin_resp = resp.json()
+            result = origin_resp.get('success')
             if result:
-                url = resp.json()['data']['url']
-                return Result(status=True, file=self.file, message=url)
+                url = origin_resp['data']['url']
+                return Result(
+                    tatus=True, 
+                    file=self.file, 
+                    message=url,
+                    remote_url=url,
+                    origin_resp=origin_resp
+                )
+                    
             else:
-                code = data.get('code')
+                code = origin_resp.get('code')
                 if code and code == 'image_repeated':
-                    url = data.get('images')
-                    return Result(status=True, file=self.file, message=url)
+                    url = origin_resp.get('images')
+                    return Result(
+                        status=True, 
+                        file=self.file, 
+                        message=url,
+                        remote_url=url,
+                        origin_resp=origin_resp
+                        )
                 else:
-                    reason = data.get('message')
+                    reason = origin_resp.get('message')
                     return Result(status=False, file=self.file, message=reason)
 
         else:
-            reason = resp.json().get('message')
+            origin_resp = dict()
+            try:
+                origin_resp = resp.json()
+            except:
+                pass
+            reason = origin_resp.get('message', 'upload fail')
             logger.warning(f'upload fail, message:{reason}')
             return Result(status=False, file=self.file, message=reason)

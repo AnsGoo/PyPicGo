@@ -1,22 +1,32 @@
-import sys
+import argparse
+
 from pypicgo.core.config import Settings
 from pypicgo.core.execute import create_uploader
 from pypicgo.core.logger import logger
 
 
 def action():
-    argv = sys.argv
-    if len(argv) == 1:
-        logger.info('PyPicGo has been installed successfully')
-    elif len(argv) > 1:
-        settings = Settings()
-        uploader = settings.uploader_class
-        uploader_config = settings.uploader_config
-        plugins = settings.plugins
-        with create_uploader(uploader, uploader_config, plugins) as uploader:
-            files = argv[1:]
-            for filepath in files:
-                uploader.do(filepath)
+
+    parser = argparse.ArgumentParser(
+        prog='PyPicGo',
+        add_help=True, 
+        description='Welcom to PyPicGo'
+        )
+    parser.add_argument('-n', '--name', type=str, help="uploader name", metavar="github")
+    parser.add_argument('-f', '--files', nargs='+', required=True, type=str, help="upload files list", metavar="./img.png")
+    args = parser.parse_args()
+    uploader_name = args.name
+    files = args.files
+    settings = Settings(uploader_name=uploader_name)
+    uploader = settings.uploader_class
+    uploader_config = settings.uploader_config
+    plugins = settings.plugins
+    with create_uploader(uploader, uploader_config, plugins) as uploader:
+        logger.info( 'upload start')
+        for filepath in files:
+            logger.info( f'upload file [{filepath}]')
+            uploader.do(filepath)
+        logger.info( 'all file has been handled')
 
 
 if __name__ == '__main__':

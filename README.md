@@ -1,6 +1,6 @@
 # PyPicGo
 
-PyPicGo 是参考[PicGo](https://github.com/PicGo/PicGo-Core)开发的一款图床上传的图传工具，并支持各种插件自定义插件，目前PyPicGo自带了`gitee`、`github`和`七牛云`图传，和`rename`、`notify`和`typora`等插件，并支持从`pypi`中下载其他插件和`Uploader`。
+PyPicGo 是一款图床工具,是[PicGo](https://github.com/PicGo/PicGo-Core)PyPicGo 是一款图床工具，是PicGo的Python版实现，并支持各种插件自定义插件，目前`PyPicGo`自带了`gitee`、`github`、`SM.MS`和`七牛云`图传，以及`rename`、`notify`和`typora`等插件，并支持从`pypi`中下载其他插件和Uploader
 
 ## 安装
 
@@ -10,23 +10,52 @@ pip install pypicgo
 
 ## 配置
 
-配置文件位于`/$HOME/.PyPicGO/config.yml`目录下，采用`YAML`的方式进行配置。必须配置上传器`uploader`,插件`plugins`的数量可选
+配置文件位于`/$HOME/.PyPicGo/config.yml`目录下，采用`YAML`的方式进行配置。必须配置上传器`uploader`,插件`plugins`的数量可选
 
 ```yaml
-uploader:
-  name: gitee # 图传名称
-  module: pypicgo.uploaders.gitee.uploader.GiteeUploader # 上传插件模块
-  config: # 上传插件初始化配置
-    owner: PyPicGo
-    repo: PyPicGo
-    img_path: PyPicGo
-    access_token: xxxxxxxxxxxx
-plugins: # 插件列表
-  - module: pypicgo.plugins.rename.ReNamePlugin # 插件模块
-    config: # 插件配置
-  - module: pypicgo.plugins.notify.NotifyPlugin
-  - module: pypicgo.plugins.clipboard.ClipBoardPlugin
-  - module: pypicgo.plugins.typora.TyporaPlugin
+default:
+  uploader: gitee
+  plugins:
+    - module: pypicgo.plugins.rename.ReNamePlugin
+      config:
+        format: liunx{hash}chenghaiwen{date}-{filename}
+    - module: pypicgo.plugins.typora.TyporaPlugin
+    - module: pypicgo.plugins.compress.Compress
+    - module: pypicgo.plugins.notify.NotifyPlugin
+
+uploaders:
+  sms:
+    module: pypicgo.uploaders.smms.uploader.SmmsUploader
+    config:
+      secret_token:  ****
+  gitee:
+    module: pypicgo.uploaders.gitee.uploader.GiteeUploader
+    config:
+      domain: https://gitee.com
+      owner: ***
+      repo: ***
+      img_path: ***
+      access_token: ***
+    plugins:
+  github:
+    module: pypicgo.uploaders.github.uploader.GithubUploader
+    config:
+      domain: https://api.github.com
+      owner: ***
+      repo: ***
+      img_path: ***
+      oauth_token: ***
+    plugins:
+      - module: pypicgo.plugins.jsdelivr.JsDeliverPlugin
+  qiniu:
+      moduele: pypicgo.uploaders.qiniu.uploader.QiNiuUploader
+      config:
+        domain: http://demo.pypicho.com/
+        bucket_name: pypicgo
+        apis:
+        - http://up-z1.qiniup.com
+        access_key: xxx
+        secret_key:  xxxx
 ```
 
 更多的配置说明参考文档
@@ -34,7 +63,7 @@ plugins: # 插件列表
 ## 使用
 
 ```shell
-pypicgo xxx.jpg
+pypicgo -n 图床名 -f img1.jpg img2.jpg
 ```
 
 ## 支持的图床
@@ -83,5 +112,5 @@ pipenv shell
 
 pipenv install
 
-python run.py  xxx.jpg
+python run.py -n 图床名 -f img1.jpg img2.jpg
 ```
