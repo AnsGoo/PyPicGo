@@ -2,8 +2,8 @@ from pypicgo.core.base.plugin import AfterPlugin
 from pypicgo.core.base.result import Result
 
 
-class JsDeliverPlugin(AfterPlugin):
-    name = 'JsDeliver'
+class JsDelivrPlugin(AfterPlugin):
+    name = 'JsDelivr'
 
     def execute(self, result: Result):
         remote_url = result.remote_url

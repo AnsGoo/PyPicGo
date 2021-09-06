@@ -40,7 +40,7 @@ uploaders:
       img_path: ***
       oauth_token: ***
     plugins:
-      - module: pypicgo.plugins.jsdelivr.JsDeliverPlugin
+      - module: pypicgo.plugins.jsdelivr.JsDelivrPlugin
   qiniu:
       moduele: pypicgo.uploaders.qiniu.uploader.QiNiuUploader
       config:
