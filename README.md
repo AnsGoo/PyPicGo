@@ -13,18 +13,6 @@ pip install pypicgo
 配置文件位于`/$HOME/.PyPicGo/config.yml`目录下，采用`YAML`的方式进行配置。必须配置上传器`uploader`,插件`plugins`的数量可选
 
 ```yaml
-
-## 安装
-
-```shell
-pip install pypicgo
-```
-
-## 配置
-
-配置文件位于`/$HOME/.PyPicGo/config.yml`目录下，采用`YAML`的方式进行配置。必须配置上传器`uploader`,插件`plugins`的数量可选
-
-```yaml
 default: # 默认配置
   uploader: gitee # 默认图床
   plugins: # 全局插件
