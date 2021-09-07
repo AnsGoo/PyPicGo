@@ -5,6 +5,7 @@ from pypicgo.core.models import ConfigModel, PluginModel
 from pypicgo.core.utils.modules import import_string
 from pypicgo.core.exceptions import ConfigException
 from pypicgo import BASE_DIR
+from pypicgo.core.logger import logger
 
 template = '''
 default:
@@ -57,17 +58,21 @@ class Settings:
             common_plugins = default.get('plugins', [])
             try:
                 able_uploaders = config['uploaders']
-            except:
+            except KeyError:
+                logger.error('No uploader available')
                 raise ConfigException('No uploader available')
             
             try:
                 default_uploader_name = default['uploader']
-            except:
+            except KeyError:
+                logger.error('default uploader is required')
                 raise ConfigException('default uploader is required')
 
             default_uploader = able_uploaders[default_uploader_name]
             if not default_uploader:
-                raise ConfigException(f'not found default uploader {default_uploader_name}')
+                msg = f'not found default uploader {default_uploader_name}'
+                logger.error(msg)
+                raise ConfigException(msg)
             if self.uploader_name:
                 cur_uploader = able_uploaders.get(self.uploader_name, default_uploader)
             else:
@@ -81,7 +86,7 @@ class Settings:
 
             plugins = []
 
-            for module, config  in plugin_dicts.items():
+            for module, config in plugin_dicts.items():
                 plugins.append({
                     'module': module,
                     'config': config
@@ -91,6 +96,8 @@ class Settings:
                 module = model.uploader.module
                 self.uploader_class = import_string(module)
             except ImportError:
-                raise ImportError(f'uploader {module} doesnt look like a module path')
+                msg = f'uploader {module} doesnt look like a module path'
+                logger.error(msg)
+                raise ImportError(msg)
             self.uploader_config = model.uploader.config
             self.plugins = model.plugins

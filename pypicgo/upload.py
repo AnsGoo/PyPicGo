@@ -22,11 +22,11 @@ def action():
     uploader_config = settings.uploader_config
     plugins = settings.plugins
     with create_uploader(uploader, uploader_config, plugins) as uploader:
-        logger.info( 'upload start')
+        logger.info('upload start')
         for filepath in files:
-            logger.info( f'upload file [{filepath}]')
+            logger.info(f'upload file [{filepath}]')
             uploader.do(filepath)
-        logger.info( 'all file has been handled')
+        logger.info('all file has been handled')
 
 
 if __name__ == '__main__':

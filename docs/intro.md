@@ -38,11 +38,6 @@
 
 每种类型的插件配置具体详见插件说明
 
-## 配置
-
-配置文件位于`/$HOME/.PyPicGo/config.yml`目录下，采用`YAML`的方式进行配置。必须配置上传器`uploader`,插件`plugins`的数量可选
-
-```yaml
 
 ## 安装
 
@@ -125,10 +120,8 @@ pypicgo -n github -f picture1 picture2 ...
 如果系统找不到`pypicgo`，请检查`python`的`Scripts`文件夹是否被加入`Path`环境变量
 
 
-
-```
 - `default.uploader`: 默认上传图床
-- `default.uploader`: 全局插件
+- `default.plugins`: 全局插件
 - `uploaders`: 可用图床配置
 
 **Note:** 图床插件私有插件优先级大于全局插件
