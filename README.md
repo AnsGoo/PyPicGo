@@ -83,10 +83,6 @@ pypicgo -n github -f picture1 picture2 ...
 如果系统找不到`pypicgo`，请检查`python`的`Scripts`文件夹是否被加入`Path`环境变量
 
 
-```
-
-更多的配置说明参考文档
-
 ## 使用
 
 ```shell
