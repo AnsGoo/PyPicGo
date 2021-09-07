@@ -134,7 +134,7 @@ plugins:
 
 - 类型： `Before`
 - 描述： 分辨率不变，画质变的图片压缩
-- 引用位置： `pypicgo.plugins.compress.Compress`
+- 引用位置： `pypicgo.plugins.compress.CompressPlugin`
 
 
 
@@ -142,7 +142,26 @@ plugins:
 
 ```yaml
 plugins:
-  - module: pypicgo.plugins.compress.Compress
+  - module: pypicgo.plugins.compress.CompressPlugin
+```
+
+配置说明：
+
+- 无配置参数
+
+## `jsDelivr`
+
+- 类型： `After`
+- 描述： github CDN 加速
+- 引用位置： `pypicgo.plugins.jsdelivr.JsDelivrPlugin`
+
+
+
+### 配置
+
+```yaml
+plugins:
+  - module: pypicgo.plugins.jsdelivr.JsDelivrPlugin
 ```
 
 配置说明：
@@ -180,4 +199,6 @@ plugins:
 
 - status: bool，是否上传成功，True:成功， False:失败
 - file: UploadFile对象
-- message: str,上传完成信息，成功：上传完成的远程地址，失败:失败原因
+- message: str,上传完成或失败信息
+- origin_resp: Dict 上传完成的原始请求数据
+- remote_url: str 上传完成的远程地址

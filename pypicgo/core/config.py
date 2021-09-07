@@ -14,42 +14,20 @@ default:
       config:
         format: liunx{hash}chenghaiwen{date}-{filename}
     - module: pypicgo.plugins.typora.TyporaPlugin
-    - module: pypicgo.plugins.compress.Compress
-    - module: pypicgo.plugins.notify.NotifyPlugin
+    ...
 
 uploaders:
-  sms:
-    module: pypicgo.uploaders.smms.uploader.SmmsUploader
-    config:
-      secret_token:  ****
-  gitee:
-    module: pypicgo.uploaders.gitee.uploader.GiteeUploader
-    config:
-      domain: https://gitee.com
-      owner: ***
-      repo: ***
-      img_path: ***
-      access_token: ***
-    plugins:
   github:
     module: pypicgo.uploaders.github.uploader.GithubUploader
     config:
       domain: https://api.github.com
-      owner: ***
-      repo: ***
-      img_path: ***
-      oauth_token: ***
+      owner: xxx
+      repo: xxx
+      img_path: xxx
+      oauth_token: xxx
     plugins:
       - module: pypicgo.plugins.jsdelivr.JsDelivrPlugin
-  qiniu:
-      moduele: pypicgo.uploaders.qiniu.uploader.QiNiuUploader
-      config:
-        domain: http://demo.pypicho.com/
-        bucket_name: pypicgo
-        apis:
-        - http://up-z1.qiniup.com
-        access_key: xxx
-        secret_key:  xxxx
+  ....
 '''
 
 
@@ -60,12 +38,11 @@ class Settings:
     plugins: List[PluginModel]
     uploader_name: str
 
-    def __init__(self, uploader_name = None):
+    def __init__(self, uploader_name=None):
         self.__init_env()
         self.uploader_name = uploader_name
         self.load_config()
         
-
     def __init_env(self):
         path = self.CONFIG_DIR.joinpath('config.yaml')
         if not path.exists():

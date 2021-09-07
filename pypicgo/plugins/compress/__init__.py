@@ -6,7 +6,7 @@ from pypicgo.core.base.file import UploadFile
 BASE_DIR = Path(__file__).resolve().parent
 
 
-class Compress(BeforePlugin):
+class CompressPlugin(BeforePlugin):
     name = 'compress'
 
     def __init__(self, ratio: float = 1.0, **kwargs):
