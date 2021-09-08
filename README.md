@@ -83,12 +83,6 @@ pypicgo -n github -f picture1 picture2 ...
 如果系统找不到`pypicgo`，请检查`python`的`Scripts`文件夹是否被加入`Path`环境变量
 
 
-## 使用
-
-```shell
-pypicgo -n 图床名 -f img1.jpg img2.jpg
-```
-
 ## 支持的图床
 
 |图床名|模块地址|
