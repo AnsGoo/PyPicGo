@@ -106,6 +106,8 @@ pypicgo -n 图床名 -f img1.jpg img2.jpg
 |notify|上传成功失败的系统通知|支持|支持|支持|
 |typora|typora编辑器支持|支持|支持|支持|
 |compress|图片上传前压缩|支持|支持|支持|
+|jsdelivr|github CDN 加速|支持|支持|支持|
+|clipboard|上传完成将远程地址复制到剪切板|支持|支持|支持|
 
 ## `Uploader`上传器
 
