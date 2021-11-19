@@ -1,6 +1,6 @@
 # PyPicGo
 
-PyPicGo 是一款图床工具,是[PicGo](https://github.com/PicGo/PicGo-Core)PyPicGo 是一款图床工具，是PicGo的Python版实现，并支持各种插件自定义插件，目前`PyPicGo`自带了`gitee`、`github`、`SM.MS`和`七牛云`图传，以及`rename`、`notify`和`typora`等插件，并支持从`pypi`中下载其他插件和Uploader
+PyPicGo 是一款图床工具,是[PicGo](https://github.com/PicGo/PicGo-Core)的Python版实现，并支持各种插件自定义插件，目前`PyPicGo`自带了`gitee`、`github`、`SM.MS`和`七牛云`图传，以及`rename`、`notify`和`typora`等插件，并支持从`pypi`中下载其他插件和Uploader
 
 ## 安装
 
