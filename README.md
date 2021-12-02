@@ -133,3 +133,9 @@ pipenv install
 
 python run.py -n 图床名 -f img1.jpg img2.jpg
 ```
+
+## 第三方插件
+
+|插件名称|作用|
+|--|--|
+|pypicgo-tinypng-plugin|利用tinypng公开接口来压缩图片|
