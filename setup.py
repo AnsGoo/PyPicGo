@@ -4,7 +4,7 @@ with open('README.rst', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 setup(
     name='pypicgo',
-    version='1.1.0',
+    version='1.1.1',
     keywords=['python', 'pypicgo'],
     description='A simple & powerful tool for pictures uploading built by python',
     long_description=long_description,
@@ -21,7 +21,8 @@ setup(
         'pyyaml>=5.3.1',
         'requests>=2.22.0',
         'requests-toolbelt>=0.9.1',
-        'Pillow>=8.2.0'
+        'Pillow>=8.2.0',
+        'pyperclip>=1.8.0'
     ],
     entry_points={
         'console_scripts': [
