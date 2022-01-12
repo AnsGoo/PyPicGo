@@ -1,7 +1,7 @@
 import yaml
 from pathlib import Path
 from typing import ClassVar, Dict, List
-from pypicgo.core.models import ConfigModel, PluginModel
+from pypicgo.core.models import ConfigModel, PluginModel, UploaderModel
 from pypicgo.core.utils.modules import import_string
 from pypicgo.core.exceptions import ConfigException
 from pypicgo import BASE_DIR
@@ -77,6 +77,8 @@ class Settings:
                 cur_uploader = able_uploaders.get(self.uploader_name, default_uploader)
             else:
                 cur_uploader = default_uploader
+            uploader_plugins = cur_uploader.pop('plugins', [])
+            uploder = UploaderModel(**cur_uploader)
             uploader_plugins = cur_uploader.get('plugins', [])
             if not uploader_plugins:
                 uploader_plugins = []
@@ -87,11 +89,13 @@ class Settings:
             plugins = []
 
             for module, config in plugin_dicts.items():
-                plugins.append({
-                    'module': module,
-                    'config': config
-                })
-            model = ConfigModel(uploader=cur_uploader, plugins=plugins)
+                plugins.append(
+                    PluginModel(**{
+                        'module': module,
+                        'config': config
+                    })
+                )
+            model = ConfigModel(uploader=uploder, plugins=plugins)
             try:
                 module = model.uploader.module
                 self.uploader_class = import_string(module)

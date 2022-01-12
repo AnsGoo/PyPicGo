@@ -1,31 +1,53 @@
 import base64
 import binascii
 from typing import Optional, List
-from pydantic import BaseModel, validator, ValidationError
 from pypicgo.core.models import PluginModel
 
 
-class GiteeUploaderData(BaseModel):
+class GiteeUploaderData:
     access_token: str
     message: str = 'pyPicGo upload success'
     content: str
 
-    @validator('content')
-    def validate_content(cls, content):
+
+    def __init__(self, access_token:str, content:str) -> None:
         try:
             if base64.b64encode(base64.b64decode(content.encode('utf-8'))) == content.encode('utf-8'):
-                return content
+                self.content = content
             else:
-                raise ValidationError('Non-base64 digit found')
-        except binascii.Error('Non-base64 digit found'):
-            raise ValidationError('Non-base64 digit found')
+                raise ValueError('Non-base64 digit found')
+        except ValueError:
+            raise ValueError('Non-base64 digit found')
+        
+        self.access_token = access_token
+
+    def json(self):
+        return {
+            'message':self.message,
+            'content': self.content,
+            'access_token': self.access_token
+        }
+
+        
 
 
-class GiteeUploaderConfig(BaseModel):
+class GiteeUploaderConfig:
     owner: str
     repo: str
     img_path: str
     access_token: str
     plugins: Optional[List[PluginModel]] = []
+    
+    def __init__(self,
+        owner:str,
+        repo:str,
+        img_path:str,
+        access_token:str,
+        plugins: Optional[List[PluginModel]] = []):
+        self.owner = owner
+        self.repo = repo
+        self.img_path = img_path
+        self.access_token = access_token
+        self.plugins = plugins
 
 

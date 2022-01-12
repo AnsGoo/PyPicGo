@@ -1,7 +1,6 @@
 import base64
 import requests
-import json
-from typing import List, Optional, Tuple
+from typing import List
 from requests import Response
 from requests_toolbelt import MultipartEncoder
 from pypicgo.core.base.uploader import CommonUploader
@@ -54,7 +53,7 @@ class GiteeUploader(CommonUploader):
 
     def upload(self) -> Result:
         filename = self.file.filename
-        data = json.loads(self._get_upload_data().json())
+        data = self._get_upload_data().json()
         form_data = MultipartEncoder(data)
         headers = {'Content-Type': form_data.content_type}
         resp = requests.post(

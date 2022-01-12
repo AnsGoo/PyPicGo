@@ -95,7 +95,7 @@ class CommonUploader(BaseUploader):
             self.result = self.upload()
             if isinstance(self.result, Result):
                 self.results.append(self.result)
-                if self.result.status is not None:
+                if self.result.status:
                     self.execute_after_plugins(self.result)
             else:
                 logger.warn(f'upload method of [{self.name}] uploader must return a Result object')

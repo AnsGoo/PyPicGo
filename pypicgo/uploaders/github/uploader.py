@@ -1,4 +1,5 @@
 import base64
+import json
 from pypicgo.core.base.result import Result
 import requests
 from typing import List
@@ -55,7 +56,7 @@ class GithubUploader(CommonUploader):
         resp = requests.put(
             url=self._upload_path(filename),
             headers=headers,
-            data=data
+            data=json.dumps(data)
         )
         result = self.is_success(resp)
         return result

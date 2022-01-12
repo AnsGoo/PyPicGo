@@ -1,4 +1,3 @@
-import tempfile
 import requests
 from typing import List
 from pathlib import Path
@@ -57,7 +56,7 @@ class SmmsUploader(CommonUploader):
             if result:
                 url = origin_resp['data']['url']
                 return Result(
-                    tatus=True, 
+                    status=True, 
                     file=self.file, 
                     message=url,
                     remote_url=url,
