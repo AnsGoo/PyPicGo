@@ -102,6 +102,7 @@ pypicgo -n github -f picture1 picture2 ...
 |compress|图片上传前压缩|支持|支持|支持|
 |jsdelivr|github CDN 加速|支持|支持|支持|
 |clipboard|上传完成将远程地址复制到剪切板|支持|支持|支持|
+|watermark|图片加水印|支持|支持|支持|
 
 ## `Uploader`上传器
 

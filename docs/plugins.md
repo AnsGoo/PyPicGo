@@ -33,6 +33,7 @@ plugins: # 插件列表
 |typora|typora编辑器支持|支持|支持|支持|
 |compress|图片上传前压缩|支持|支持|支持|
 |clipboard|图片上传完成路劲写入剪切板|支持|支持|支持|
+|watermark|图片加水印|支持|支持|支持|
 
 ## `Rename`
 
@@ -167,6 +168,32 @@ plugins:
 配置说明：
 
 - 无配置参数
+
+## `watermark`
+
+- 类型： `Before`
+- 描述： 给图片加水印
+- 引用位置： `pypicgo.plugins.watermark.WaterMarkPlugin`
+
+
+
+### 配置
+
+```yaml
+plugins:
+  - module: pypicgo.plugins.watermark.WaterMarkPlugin
+      config:
+        mark: https://gitee.com/Ranger313
+        font: 字体文件路径
+        size: 40
+```
+
+配置说明：
+
+- `mark`: 水印文字内容
+- `font`: 字体文件路径，默认采用`SourceHanSans-Light`字体
+- `size`: 水印文字大小，默认字体大小40
+
 
 
 ## 自定义插件
