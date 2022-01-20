@@ -139,5 +139,5 @@ python run.py -n 图床名 -f img1.jpg img2.jpg
 
 |插件名称|作用|
 |--|--|
-|pypicgo-tinypng-plugin|利用tinypng公开接口来压缩图片|
-|pypicgo-blind-watermark-plugin|给图片加盲水印|
+|[pypicgo-tinypng-plugin](https://github.com/AnsGoo/pypicgo-tinypng-plugin)|利用tinypng公开接口来压缩图片|
+|[pypicgo-blind-watermark-plugin](https://github.com/AnsGoo/pypicgo-blind-watermark-plugin)|给图片加盲水印|
