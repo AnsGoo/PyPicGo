@@ -1,5 +1,4 @@
 import base64
-import binascii
 from typing import Optional, List
 from pypicgo.core.models import PluginModel
 

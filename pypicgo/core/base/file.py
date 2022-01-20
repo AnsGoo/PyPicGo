@@ -1,5 +1,4 @@
 import os
-import hashlib
 from pathlib import Path
 from pypicgo.core.exceptions import (PathNotExistsException, IsNotFileException)
 from pypicgo.core.logger import logger
